@@ -1,38 +1,16 @@
-<!doctype html>
-<html lang="ko">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#ff6f9f">
-<link rel="manifest" href="manifest.json">
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
-<title>루루와 마법성의 그림조각 V1.1</title>
-<style>
-*{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo",sans-serif;background:linear-gradient(#dff6ff,#fff5fb);color:#49364b}
-#app{max-width:900px;margin:auto;min-height:100vh;padding:14px}.card{background:#ffffffee;border-radius:28px;padding:18px;box-shadow:0 8px 28px #76536a22;text-align:center}
-.hero{width:100%;border-radius:22px;max-height:270px;object-fit:cover}.big{font-size:clamp(30px,5vw,50px);margin:12px}.sub{font-size:20px;line-height:1.55}
-button{border:0;border-radius:22px;padding:15px 22px;margin:7px;font-size:22px;font-weight:800;background:#fff;color:#4b3b55;box-shadow:0 5px 0 #d8c9dc;touch-action:manipulation}
-.primary{background:#ff6f9f;color:white;box-shadow:0 5px 0 #d94c7c}.top{display:flex;justify-content:space-between;align-items:center;gap:8px;font-weight:800;margin-bottom:10px}.pill{background:white;border-radius:20px;padding:8px 12px}
-.stage{min-height:430px;display:flex;flex-direction:column;justify-content:center;align-items:center}.pieces{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}.piece{font-size:64px;cursor:pointer;transition:.2s}.piece:active{transform:scale(.9)}
-.scene{position:relative;width:min(720px,100%);height:340px;border-radius:24px;overflow:hidden;background:linear-gradient(#8ed9ff 0 45%,#73c86b 45%);border:7px solid white}
-.hideitem{position:absolute;font-size:54px;cursor:pointer}.duckbox{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}.duck{font-size:55px;cursor:pointer}.boat{font-size:90px;margin:15px}
-.gems{position:relative;width:min(700px,100%);height:330px;border-radius:24px;background:#2f2750;overflow:hidden}.gem{position:absolute;font-size:46px;animation:float 2.2s infinite alternate ease-in-out;cursor:pointer}@keyframes float{to{transform:translateY(25px) rotate(8deg)}}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;width:min(520px,90vw);aspect-ratio:1}.tile{background-size:300% 300%;border-radius:12px;border:3px solid white;cursor:pointer;min-height:80px}.selected{outline:6px solid #ffd84d;transform:scale(.96)}
-.castle{font-size:72px}.spark{position:fixed;pointer-events:none;font-size:35px;animation:pop .8s forwards}@keyframes pop{to{transform:translateY(-100px) scale(1.7);opacity:0}}
-.bar{height:18px;background:#eee;border-radius:10px;overflow:hidden;width:min(500px,90%)}.fill{height:100%;background:#ff7cad}
-.small{font-size:16px;color:#786b7d}.hidden{display:none}
-</style>
-</head>
-<body>
-<div id="app">
-<div class="card">
-<img class="hero" src="hero.jpg" alt="루루와 마법성">
-<h1 class="big">루루와 마법성의 그림조각</h1>
-<p class="sub">마법성의 소중한 그림이 산산이 흩어졌어요.<br>루루와 함께 <b>세 조각</b>을 찾아볼까요?</p>
-<button class="primary" onclick="intro()">▶ 모험 시작하기</button><br>
-<button onclick="challenge()">🏆 보석 챌린지</button>
-<p class="small">그림이 보이고 이 화면이 나타나면 정상입니다.</p>
-</div></div>
-<script src="game.js"></script>
-</body>
-</html>
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="manifest" href="manifest.json"><link rel="apple-touch-icon" href="apple-touch-icon.png"><title>10을 찾아라!</title><style>
+*{box-sizing:border-box}body{margin:0;background:#fff9e8;color:#493c50;font-family:-apple-system,"Apple SD Gothic Neo",sans-serif}#a{max-width:850px;margin:auto;padding:18px}.p{background:white;border-radius:28px;padding:20px;text-align:center;box-shadow:0 8px 24px #76536a20}h1{font-size:44px}.lead{font-size:21px;line-height:1.5}.go,.n{border:0;font-weight:800;touch-action:manipulation}.go{font-size:23px;padding:16px 25px;border-radius:20px;background:#ff789c;color:white}.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:20px auto;max-width:650px}.n{height:100px;border-radius:20px;background:#fff;border:4px solid #ead8a8;font-size:46px;box-shadow:0 5px 0 #d9c79a}.n.s{border-color:#ff789c;background:#fff0f5;transform:translateY(3px)}.ten{display:grid;grid-template-columns:repeat(5,1fr);gap:5px;max-width:450px;margin:15px auto}.c{aspect-ratio:1;border:3px solid #b9abc2;border-radius:9px}.c.f{background:#ffd76a}.msg{font-size:23px;font-weight:800;min-height:65px}.top{display:flex;justify-content:space-between}.pill{background:white;border-radius:18px;padding:9px 14px;font-weight:800}.piece{font-size:55px}.dim{opacity:.2;filter:grayscale(1)}@media(max-width:500px){.cards{grid-template-columns:repeat(3,1fr)}.n{height:85px}}
+</style></head><body><div id="a"></div><script>
+(function(){var A=document.getElementById("a"),sel=[],stars=0,pieces=0,wins=0;
+function home(){A.innerHTML='<div class="p"><div style="font-size:100px">🔟✨🧩</div><h1>10을 찾아라!</h1><p class="lead">숫자 친구 둘이 만나 <b>10</b>이 되면<br>마법 그림조각이 나타나요.</p><button class="go" id="go">숫자 친구 만나러 가기</button><p>시간 제한도, 빨간 ❌도 없어요.</p></div>';document.getElementById("go").onclick=round}
+function bar(){return '<div class="top"><span class="pill">⭐ '+stars+'</span><span class="pill">🧩 '+pieces+'/4</span></div>'}
+function deck(){var d=[],ps=[[1,9],[2,8],[3,7],[4,6],[5,5]];for(var k=0;k<4;k++){var p=ps[Math.floor(Math.random()*5)];d.push(p[0],p[1])}while(d.length<12)d.push(1+Math.floor(Math.random()*9));for(var i=d.length-1;i;i--){var j=Math.floor(Math.random()*(i+1)),t=d[i];d[i]=d[j];d[j]=t}return d}
+function frame(n){var t=document.getElementById("ten");if(!t)return;t.innerHTML="";for(var i=0;i<10;i++){var c=document.createElement("div");c.className="c"+(i<n?" f":"");t.appendChild(c)}}
+function round(){sel=[];A.innerHTML=bar()+'<div class="p"><h2>숫자 친구 둘을 골라 10을 만들어봐!</h2><div class="ten" id="ten"></div><div class="msg" id="sum">어떤 둘이 친구일까? 👀</div><div class="cards" id="cards"></div><div class="msg" id="msg">천천히 찾아도 괜찮아.</div></div>';frame(0);deck().forEach(function(v){var b=document.createElement("button");b.className="n";b.textContent=v;b.onclick=function(){pick(b,v)};document.getElementById("cards").appendChild(b)})}
+function pick(b,v){if(b.disabled)return;if(b.classList.contains("s")){b.classList.remove("s");sel=sel.filter(function(x){return x.b!==b})}else if(sel.length<2){b.classList.add("s");sel.push({b:b,v:v})}var s=0;sel.forEach(function(x){s+=x.v});frame(Math.min(10,s));document.getElementById("sum").textContent=sel.length?sel.map(function(x){return x.v}).join(" + ")+" → "+s:"어떤 둘이 친구일까? 👀";if(sel.length===2)setTimeout(check,250)}
+function check(){var s=sel[0].v+sel[1].v,m=document.getElementById("msg");if(s===10){var x=sel[0].v,y=sel[1].v;sel.forEach(function(q){q.b.disabled=true;q.b.style.opacity=".25";q.b.classList.remove("s")});sel=[];stars++;wins++;frame(10);document.getElementById("sum").textContent=x+" + "+y+" = 10";m.textContent="✨ 찾았다! "+x+"와 "+y+"가 만나 10!";if(wins%2===0){pieces++;setTimeout(pieces>=4?puzzle:reward,800)}}else{m.textContent=s<10?"거의 왔어! "+(10-s)+"칸이 비었네. 👀":"10을 조금 지나갔네. 다른 친구는 누구일까? 😊";setTimeout(function(){sel.forEach(function(q){q.b.classList.remove("s")});sel=[];frame(0);document.getElementById("sum").textContent="다른 둘을 찾아보자!"},900)}}
+function reward(){A.innerHTML=bar()+'<div class="p"><div style="font-size:120px">🧩✨</div><h1>그림조각 발견!</h1><div>'+[1,2,3,4].map(function(i){return '<span class="piece '+(i>pieces?"dim":"")+'">🧩</span>'}).join("")+'</div><p class="lead">10을 찾을수록 비밀 친구가 가까워져요.</p><button class="go" id="more">다른 10 찾기</button></div>';document.getElementById("more").onclick=round}
+function puzzle(){A.innerHTML=bar()+'<div class="p"><h1>네 조각이 모였어요!</h1><p class="lead">네 조각을 모두 눌러 비밀 친구를 깨워주세요.</p><div id="pz" class="cards"></div><div class="msg" id="pm">🧩 조각을 하나씩 눌러봐!</div></div>';var h=0;["🌟","🌈","🍓","💗"].forEach(function(e){var b=document.createElement("button");b.className="n";b.textContent=e;b.onclick=function(){if(b.disabled)return;b.disabled=true;b.style.background="#fff1b5";h++;document.getElementById("pm").textContent=h+"/4 조각이 반짝였어요 ✨";if(h===4)setTimeout(friend,600)};document.getElementById("pz").appendChild(b)})}
+function friend(){A.innerHTML='<div class="p"><div style="font-size:140px">🐰✨</div><h1>짜잔! 토리 탄생!</h1><p class="lead">“10을 찾아줘서 고마워!”<br>토리가 첫 번째 수집 친구가 되었어요.</p><button class="go" id="again">토리와 다시 10 찾기</button></div>';document.getElementById("again").onclick=function(){pieces=0;wins=0;round()}}
+home()})();
+</script></body></html>
