@@ -1,11 +1,10 @@
 {
-  "name": "꿈꾸는 마법성",
-  "short_name": "마법성",
+  "name": "루루와 마법성의 그림조각",
+  "short_name": "루루 그림조각",
   "start_url": "./",
-  "scope": "./",
   "display": "standalone",
-  "background_color": "#fff7fb",
-  "theme_color": "#ffd8e8",
+  "background_color": "#fff6fb",
+  "theme_color": "#ff6f9f",
   "icons": [
     {
       "src": "icon-192.png",
