@@ -1,8 +1,12 @@
-<!doctype html><html lang="ko"><head><meta charset="utf-8">
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#ff6f9f"><link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#ff6f9f">
+<link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<title>루루와 마법성의 그림조각</title>
+<title>루루와 마법성의 그림조각 V1.1</title>
 <style>
 *{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo",sans-serif;background:linear-gradient(#dff6ff,#fff5fb);color:#49364b}
 #app{max-width:900px;margin:auto;min-height:100vh;padding:14px}.card{background:#ffffffee;border-radius:28px;padding:18px;box-shadow:0 8px 28px #76536a22;text-align:center}
@@ -17,32 +21,18 @@ button{border:0;border-radius:22px;padding:15px 22px;margin:7px;font-size:22px;f
 .castle{font-size:72px}.spark{position:fixed;pointer-events:none;font-size:35px;animation:pop .8s forwards}@keyframes pop{to{transform:translateY(-100px) scale(1.7);opacity:0}}
 .bar{height:18px;background:#eee;border-radius:10px;overflow:hidden;width:min(500px,90%)}.fill{height:100%;background:#ff7cad}
 .small{font-size:16px;color:#786b7d}.hidden{display:none}
-</style></head><body><div id="app"></div>
-<script>
-let A=document.getElementById('app'), crowns=+(localStorage.crowns||0), best=+(localStorage.best||0), step=0, found=0;
-const save=()=>{localStorage.crowns=crowns;localStorage.best=best}
-function top(){return `<div class="top"><span class="pill">🧩 조각 ${Math.min(found,3)}/3</span><span class="pill">👑 ${crowns}</span></div>`}
-function fx(){for(let i=0;i<10;i++){let e=document.createElement('div');e.className='spark';e.textContent=['✨','⭐','💗'][i%3];e.style.left=(20+Math.random()*60)+'vw';e.style.top=(35+Math.random()*30)+'vh';document.body.append(e);setTimeout(()=>e.remove(),800)}}
-function home(){A.innerHTML=`<div class="card"><img class="hero" src="hero.jpg"><h1 class="big">루루와 마법성의 그림조각</h1><p class="sub">마법성의 소중한 그림이 산산이 흩어졌어요.<br>루루와 함께 <b>세 조각</b>을 찾아볼까요?</p><button class="primary" onclick="intro()">▶ 모험 시작하기</button><br><button onclick="challenge()">🏆 보석 챌린지</button><p class="small">최고기록 ${best}점 · 기록은 이 기기에 저장돼요.</p></div>`}
-function intro(){A.innerHTML=`${top()}<div class="card stage"><div style="font-size:110px">🐰🖼️</div><h2 class="big">앗! 그림이 사라졌어!</h2><p class="sub">빈 액자만 남았어요.<br>숲과 강, 동굴에 흩어진 그림조각을 찾아주세요.</p><button class="primary" onclick="forest()">숲으로 출발! 🌳</button></div>`}
-function forest(){A.innerHTML=`${top()}<div class="card"><h2>🌳 첫 번째 조각 — 숲속 숨은그림</h2><p class="sub">나뭇잎 사이에 숨어 있는 🧩을 찾아보세요.</p><div class="scene">
-<span class="hideitem" style="left:8%;top:15%">🌸</span><span class="hideitem" style="left:70%;top:8%">🦋</span><span class="hideitem" style="left:20%;top:60%">🍄</span><span class="hideitem" style="left:77%;top:63%">🐿️</span>
-<span class="hideitem" onclick="getPiece(river)" style="left:51%;top:45%;font-size:42px;transform:rotate(-18deg)">🧩</span></div></div>`}
-function getPiece(next){found++;crowns++;save();fx();setTimeout(()=>{A.innerHTML=`${top()}<div class="card stage"><div style="font-size:110px">🧩✨</div><h2 class="big">그림조각 발견!</h2><p class="sub">루루가 첫 조각을 찾았어요!</p><button class="primary" id="go">계속 모험하기</button></div>`;document.getElementById('go').onclick=next},500)}
-function river(){A.innerHTML=`${top()}<div class="card"><h2>🦆 두 번째 조각 — 오리 구조대</h2><p class="sub">오리 <b>7마리</b>가 기다려요. 배에는 한 번에 <b>4마리</b>까지 탈 수 있어요.<br>오리를 눌러 배에 태워주세요.</p><div id="ducks" class="duckbox">${'🦆'.repeat(7).split('').map((x,i)=>`<span class="duck" onclick="duck(this)">${x}</span>`).join('')}</div><div class="boat">🚣 <span id="boatn">0</span>/4</div><p id="riverMsg" class="sub"></p></div>`}
-let boat=0,crossed=0;
-function duck(e){if(boat>=4)return;e.style.visibility='hidden';boat++;document.getElementById('boatn').textContent=boat;if(boat==4 || crossed+boat==7){crossed+=boat;boat=0;document.getElementById('boatn').textContent=0;document.getElementById('riverMsg').textContent=`강을 건넌 오리 ${crossed}마리!`;fx();if(crossed==7)setTimeout(()=>getPiece(cave),600)}}
-function cave(){A.innerHTML=`${top()}<div class="card"><h2>💎 세 번째 조각 — 보석 동굴</h2><p class="sub">반짝이는 보석 중 <b>5개만</b> 모아주세요!</p><div class="gems" id="gems"></div><h2 id="count">0 / 5</h2></div>`;let g=document.getElementById('gems');for(let i=0;i<9;i++){let e=document.createElement('span');e.className='gem';e.textContent=['💎','🔷','💗','⭐'][i%4];e.style.left=(8+(i*19)%82)+'%';e.style.top=(8+(i*31)%75)+'%';e.onclick=()=>gem(e);g.append(e)}}
-let gc=0;
-function gem(e){if(e.dataset.hit)return;e.dataset.hit=1;e.style.opacity=.15;gc++;document.getElementById('count').textContent=gc+' / 5';if(gc==5){found++;crowns+=2;save();fx();setTimeout(puzzle,800)}}
-function puzzle(){A.innerHTML=`${top()}<div class="card"><h2 class="big">🧩 조각이 모두 모였어요!</h2><p class="sub">이제 흩어진 그림을 맞춰볼까요?<br><span class="small">조각 두 개를 차례로 눌러 자리를 바꿔요.</span></p><div class="grid" id="grid"></div><button onclick="shufflePuzzle()">🔀 다시 섞기</button></div>`;makePuzzle()}
-let order=[],sel=null;
-function makePuzzle(){order=[0,1,2,3,4,5,6,7,8].sort(()=>Math.random()-.5);drawPuzzle()}
-function drawPuzzle(){let g=document.getElementById('grid');g.innerHTML='';order.forEach((n,i)=>{let d=document.createElement('div');d.className='tile';d.style.backgroundImage="url('hero.jpg')";d.style.backgroundPosition=`${(n%3)*50}% ${Math.floor(n/3)*50}%`;d.onclick=()=>pick(i,d);g.append(d)})}
-function pick(i,d){if(sel===null){sel=i;d.classList.add('selected')}else{[order[sel],order[i]]=[order[i],order[sel]];sel=null;drawPuzzle();if(order.every((x,j)=>x==j)){crowns+=3;save();fx();setTimeout(friend,800)}}}
-function shufflePuzzle(){sel=null;makePuzzle()}
-function friend(){A.innerHTML=`${top()}<div class="card stage"><div style="font-size:130px">🐲✨</div><h1 class="big">새로운 친구 발견!</h1><p class="sub">“나를 찾아줘서 고마워!<br>이제 마법성에서 함께 살자!”</p><button class="primary" onclick="finish()">아기용과 성으로 가기 🏰</button></div>`}
-function finish(){A.innerHTML=`${top()}<div class="card stage"><div class="castle">🏰 🌷 🐲</div><h1 class="big">첫 번째 그림 완성!</h1><p class="sub">아기용이 마법성의 새 친구가 되었어요.<br>그런데… 빈 액자 뒤에서 <b>또 다른 조각</b>이 반짝여요. ✨</p><div style="font-size:90px">🧩❓</div><button class="primary" onclick="home()">오늘의 모험 끝내기</button><button onclick="challenge()">🏆 최고기록 도전!</button></div>`}
-function challenge(){let score=0,time=30;A.innerHTML=`<div class="top"><span class="pill">⏱️ <b id="tm">30</b></span><span class="pill">💎 <b id="sc">0</b></span><span class="pill">🏆 ${best}</span></div><div class="card"><h2>보석 챌린지</h2><p>💎만 잡아요! ⭐는 누르지 마세요.</p><div class="gems" id="cg"></div></div>`;let cg=document.getElementById('cg');function spawn(){if(time<=0)return;let e=document.createElement('span');e.className='gem';let good=Math.random()>.3;e.textContent=good?'💎':'⭐';e.style.left=(5+Math.random()*85)+'%';e.style.top=(5+Math.random()*75)+'%';e.onclick=()=>{if(e.dataset.h)return;e.dataset.h=1;score+=good?1:-1;document.getElementById('sc').textContent=score;e.remove()};cg.append(e);setTimeout(()=>e.remove(),1700)}let sp=setInterval(spawn,420);let ti=setInterval(()=>{time--;document.getElementById('tm').textContent=time;if(time<=0){clearInterval(sp);clearInterval(ti);best=Math.max(best,score);save();A.innerHTML=`<div class="card stage"><div style="font-size:100px">🏆</div><h1 class="big">${score}점!</h1><p class="sub">최고기록 <b>${best}점</b></p><button class="primary" onclick="challenge()">한 번 더!</button><button onclick="home()">마법성으로</button></div>`}},1000)}
-home();
-</script></body></html>
+</style>
+</head>
+<body>
+<div id="app">
+<div class="card">
+<img class="hero" src="hero.jpg" alt="루루와 마법성">
+<h1 class="big">루루와 마법성의 그림조각</h1>
+<p class="sub">마법성의 소중한 그림이 산산이 흩어졌어요.<br>루루와 함께 <b>세 조각</b>을 찾아볼까요?</p>
+<button class="primary" onclick="intro()">▶ 모험 시작하기</button><br>
+<button onclick="challenge()">🏆 보석 챌린지</button>
+<p class="small">그림이 보이고 이 화면이 나타나면 정상입니다.</p>
+</div></div>
+<script src="game.js"></script>
+</body>
+</html>
