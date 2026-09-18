@@ -1,117 +1,59 @@
-<!doctype html>
-<html lang="ko">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="theme-color" content="#fff6fb">
-<title>루루와 잠든 작은 성</title>
-<link rel="manifest" href="manifest.json">
-<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-<meta name="apple-mobile-web-app-title" content="루루의 성">
-<style>
-:root{--ink:#4d4054;--pink:#ff86b7;--cream:#fff9ef;--card:#ffffffd9;--shadow:0 12px 30px #7e668022}
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;color:var(--ink);
-background:linear-gradient(#ccecff 0 35%,#dff4c8 35% 100%);min-height:100vh;overflow-x:hidden}
-#app{max-width:900px;margin:auto;min-height:100vh;padding:18px}
-.scene{display:none;animation:pop .35s ease}.scene.active{display:block}
-@keyframes pop{from{opacity:.2;transform:scale(.98)}to{opacity:1;transform:none}}
-.panel{background:var(--card);border:3px solid #fff;border-radius:28px;box-shadow:var(--shadow);padding:20px;margin-top:12px;text-align:center}
-h1{font-size:clamp(30px,6vw,54px);margin:8px} h2{font-size:clamp(25px,5vw,38px);margin:8px}
-p{font-size:clamp(19px,3.4vw,27px);line-height:1.55;margin:10px}
-.hero{font-size:100px;filter:drop-shadow(0 10px 5px #7773)}
-.castle{font-size:clamp(120px,27vw,230px);line-height:1}
-button{border:0;border-radius:22px;padding:15px 24px;margin:8px;font-size:clamp(19px,3vw,25px);font-weight:750;color:#59475b;background:#fff;box-shadow:0 7px 0 #dfcce1;touch-action:manipulation}
-button:active{transform:translateY(4px);box-shadow:0 3px 0 #dfcce1}.primary{background:#ffdaeb}.good{background:#e4f7cf}
-.row{display:flex;flex-wrap:wrap;justify-content:center;gap:12px}.choice{font-size:60px;min-width:105px;min-height:100px}
-.progress{display:flex;gap:8px;justify-content:center;margin:5px}.dot{width:14px;height:14px;border-radius:50%;background:#fff8}.dot.on{background:#ff75aa}
-.playarea{min-height:190px;background:#fff8;border-radius:24px;padding:18px;margin:12px 0;border:2px dashed #fff}
-.flower{font-size:58px;display:inline-block;margin:4px}.nut{font-size:52px;cursor:pointer}.squirrel{font-size:75px;min-width:120px}
-.counter{font-size:23px;font-weight:700}
-.room{min-height:260px;background:linear-gradient(#fff0f5 0 72%,#e7caa7 72%);border-radius:24px;position:relative;padding:18px;overflow:hidden}
-#decor{font-size:60px;min-height:90px}.decorBtn{font-size:48px}
-.small{font-size:17px;opacity:.75}.spark{position:fixed;pointer-events:none;font-size:40px;animation:fly 1s forwards}
-@keyframes fly{to{transform:translateY(-130px) rotate(80deg);opacity:0}}
-.locked{opacity:.55}.books{font-size:55px}
-</style>
-</head>
-<body><div id="app">
-<div class="progress" id="progress"></div>
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="마법성"><link rel="apple-touch-icon" href="apple-touch-icon.png"><link rel="manifest" href="manifest.json">
+<title>꿈꾸는 마법성 V2</title><style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}body{margin:0;font-family:-apple-system,"Apple SD Gothic Neo",sans-serif;color:#594455;background:linear-gradient(#cdeeff,#f7dff0);min-height:100vh}
+#app{max-width:950px;margin:auto;padding:16px}.page{display:none}.page.on{display:block;animation:a .3s}@keyframes a{from{opacity:.2;transform:scale(.98)}}
+.card{background:#fffde;border:3px solid white;border-radius:28px;padding:18px;margin:10px 0;text-align:center;box-shadow:0 12px 25px #7653a422}h1{font-size:clamp(30px,6vw,52px);margin:8px}h2{font-size:clamp(25px,5vw,38px)}p{font-size:clamp(19px,3vw,25px);line-height:1.5}
+button{border:0;border-radius:22px;padding:14px 22px;margin:8px;font-size:clamp(18px,3vw,23px);font-weight:750;background:#fff;box-shadow:0 6px 0 #dbc9dc;color:#594455}button:active{transform:translateY(3px)}
+.books{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.book{min-height:300px;padding:18px;border-radius:28px;border:5px solid white;display:flex;flex-direction:column;justify-content:space-between}.pink{background:#ffd7e8}.green{background:#dff3d0}.blue{background:#d8ebff}.hero{font-size:95px}.big{font-size:70px}.play{min-height:180px;border-radius:24px;background:#fff9;padding:16px;margin:12px 0}.row{display:flex;flex-wrap:wrap;justify-content:center;gap:10px}.choice{font-size:52px;min-width:90px}.top{display:flex;justify-content:space-between;align-items:center}.home{font-size:18px}.spark{position:fixed;font-size:38px;animation:f 1s forwards;pointer-events:none}@keyframes f{to{transform:translateY(-130px);opacity:0}}
+.room{min-height:210px;border-radius:22px;background:linear-gradient(#fff0f5 0 70%,#e8c69f 70%);font-size:55px;padding:25px}.small{opacity:.7;font-size:16px}@media(max-width:700px){.books{grid-template-columns:1fr}.book{min-height:230px}}
+</style></head><body><div id="app">
+<section class="page on" id="home"><div class="card"><h1>🏰 꿈꾸는 마법성</h1><p>오늘은 어떤 이야기를 펼쳐볼까요?</p><div class="books">
+<div class="book pink"><div><div class="hero">🐰</div><h2>루루와<br>잠든 작은 성</h2><p>성문을 열고 첫 번째 방을 꾸며요.</p></div><button onclick="start('lulu')">📕 이야기 시작하기</button></div>
+<div class="book green"><div><div class="hero">🐱</div><h2>미미와<br>비밀의 보물방</h2><p>그림을 살펴보고 숨겨진 보물을 찾아요.</p></div><button onclick="start('mimi')">📗 이야기 시작하기</button></div>
+<div class="book blue"><div><div class="hero">🐻</div><h2>토토와<br>마법의 케이크 가게</h2><p>손님을 맞고 예쁜 케이크를 만들어요.</p></div><button onclick="start('toto')">📘 이야기 시작하기</button></div>
+</div><p class="small">점수도 시험도 없어요. 이야기를 따라 놀아보세요 ✨</p></div></section>
 
-<section class="scene active" id="s0">
- <div class="panel">
-  <div class="hero">🐰</div><h1>루루와 잠든 작은 성</h1>
-  <p>숲을 걷던 루루가<br>처음 보는 작은 성을 발견했어요.</p>
-  <div class="castle">🏰</div>
-  <p>“우리 같이 들어가 볼래?”</p>
-  <button class="primary" onclick="go(1)">성으로 가기 ✨</button>
- </div>
-</section>
-
-<section class="scene" id="s1"><div class="panel">
- <h2>🔐 성문을 열어 주세요</h2><p>성문에 꼭 맞는 열쇠는 어느 것일까요?</p>
- <div class="playarea"><div style="font-size:95px">🚪 <span style="font-size:50px">♥</span></div></div>
- <div class="row">
-  <button class="choice" onclick="nope(this)">🔑★</button>
-  <button class="choice" onclick="win(this,2)">🔑♥</button>
-  <button class="choice" onclick="nope(this)">🔑●</button>
- </div><p id="hint1"></p>
-</div></section>
-
-<section class="scene" id="s2"><div class="panel">
- <h2>🌷 비밀 정원을 깨워요</h2>
- <p>루루가 꽃 <b>3송이</b>를 심었어요.<br>꽃을 <b>2송이</b> 더 심어 주세요.</p>
- <div class="playarea" id="garden"><span class="flower">🌷</span><span class="flower">🌷</span><span class="flower">🌷</span></div>
- <div><button class="choice good" id="flowerBtn" onclick="addFlower()">🌼</button></div>
- <p class="counter" id="flowerText">꽃을 눌러 심어 주세요 🌱</p>
-</div></section>
-
-<section class="scene" id="s3"><div class="panel">
- <h2>🐿️ 다람쥐 친구가 왔어요</h2>
- <p>도토리가 <b>6개</b> 있어요.<br>두 친구에게 하나씩 나눠 주세요.</p>
- <div class="playarea"><div id="nuts"></div>
-  <div class="row"><button class="squirrel" onclick="feed(0)">🐿️<span id="a"></span></button><button class="squirrel" onclick="feed(1)">🐿️<span id="b"></span></button></div>
- </div><p id="feedText">다람쥐를 눌러 도토리를 주세요.</p>
-</div></section>
-
-<section class="scene" id="s4"><div class="panel">
- <h2>✨ 비밀문의 장식</h2><p>다음에는 어떤 그림이 오면 좋을까요?</p>
- <div class="playarea" style="font-size:65px">⭐ 🌙 ⭐ 🌙 ⭐ ❓</div>
- <div class="row"><button class="choice" onclick="win(this,5)">🌙</button><button class="choice" onclick="nope(this)">⭐</button><button class="choice" onclick="nope(this)">🌸</button></div>
-</div></section>
-
-<section class="scene" id="s5"><div class="panel">
- <h2>🛏️ 루루의 첫 번째 방</h2><p>마음에 드는 물건을 골라 방을 꾸며 주세요.<br><span class="small">여러 개 골라도 괜찮아요.</span></p>
- <div class="room"><div style="font-size:70px">🪟</div><div id="decor">🛏️</div></div>
- <div class="row">
-  <button class="decorBtn" onclick="decorate('🧸')">🧸</button><button class="decorBtn" onclick="decorate('🪴')">🪴</button>
-  <button class="decorBtn" onclick="decorate('🖼️')">🖼️</button><button class="decorBtn" onclick="decorate('🛋️')">🛋️</button>
- </div><button class="primary" onclick="go(6)">내 방 완성! ✨</button>
-</div></section>
-
-<section class="scene" id="s6"><div class="panel">
- <div class="hero">🐰</div><h1>우리 성이 깨어났어요!</h1>
- <div class="castle">🏰✨</div>
- <p>루루와 함께 첫 번째 이야기를 완성했어요.</p>
- <div class="books">📕　📗🔒　📘🔒</div>
- <p><b>다음 이야기</b><br>🌿 비밀 정원　🐱 미미의 방　🍰 케이크 가게</p>
- <p>“다음에는 어디를 열어볼까?”</p>
- <button class="primary" onclick="restart()">처음부터 다시 놀기</button>
-</div></section>
-</div>
-<script>
-let current=0, planted=0, nuts=6, feeds=[0,0];
-function dots(){let e=document.getElementById('progress');e.innerHTML='';for(let i=0;i<7;i++){let d=document.createElement('span');d.className='dot '+(i<=current?'on':'');e.appendChild(d)}}
-function go(n){document.getElementById('s'+current).classList.remove('active');current=n;document.getElementById('s'+current).classList.add('active');dots();window.scrollTo({top:0,behavior:'smooth'})}
-function sparkle(){for(let i=0;i<8;i++){let s=document.createElement('span');s.className='spark';s.textContent=['✨','🌟','💗'][i%3];s.style.left=(20+Math.random()*60)+'vw';s.style.top=(45+Math.random()*25)+'vh';document.body.appendChild(s);setTimeout(()=>s.remove(),1000)}}
-function win(btn,next){sparkle();btn.style.background='#dff7ca';setTimeout(()=>go(next),650)}
-function nope(btn){btn.animate([{transform:'translateX(-6px)'},{transform:'translateX(6px)'},{transform:'translateX(0)'}],{duration:260});}
-function addFlower(){if(planted>=2)return;planted++;document.getElementById('garden').insertAdjacentHTML('beforeend','<span class="flower">🌼</span>');document.getElementById('flowerText').textContent=planted<2?'한 송이 더 심어볼까요?':'정원이 활짝 피었어요! 🌷🌼';if(planted==2){sparkle();setTimeout(()=>go(3),900)}}
-function drawNuts(){document.getElementById('nuts').textContent='🌰'.repeat(nuts)}
-function feed(i){if(nuts<=0)return;nuts--;feeds[i]++;document.getElementById(i?'b':'a').textContent=' 🌰'.repeat(feeds[i]);drawNuts();document.getElementById('feedText').textContent=nuts?('도토리가 '+nuts+'개 남았어요.'):'모두 나누어 주었어요!';if(nuts==0){sparkle();setTimeout(()=>go(4),900)}}
-function decorate(x){document.getElementById('decor').textContent+=x;sparkle()}
-function restart(){planted=0;nuts=6;feeds=[0,0];document.getElementById('garden').innerHTML='<span class="flower">🌷</span><span class="flower">🌷</span><span class="flower">🌷</span>';document.getElementById('decor').textContent='🛏️';document.getElementById('a').textContent='';document.getElementById('b').textContent='';drawNuts();go(0)}
-drawNuts();dots();
-</script>
-</body></html>
+<section class="page" id="game"><div class="top"><button class="home" onclick="home()">← 이야기책장</button><b id="title"></b></div><div class="card" id="content"></div></section>
+</div><script>
+let story='',step=0,state={};
+const data={
+lulu:[
+["🐰","숲속에서 작은 성을 발견했어요.","성문에 맞는 열쇠를 찾아볼까요?",["🔑★","🔑♥","🔑●"],1],
+["🌷","비밀 정원이 잠들어 있어요.","꽃 3송이 옆에 2송이를 더 심어 주세요.",["🌼","🌼"],"flowers"],
+["🐿️","다람쥐 친구들이 찾아왔어요.","도토리 6개를 두 친구에게 나누어 주세요.",[],"nuts"],
+["✨","비밀문에 장식이 있어요.","⭐ 🌙 ⭐ 🌙 ⭐ 다음 그림은?",["🌙","⭐","🌸"],0],
+["🛏️","루루의 첫 번째 방이에요.","마음에 드는 물건을 골라 꾸며 주세요.",["🧸","🪴","🖼️","🛋️"],"decor"]],
+mimi:[
+["🐱","미미가 반짝이는 지도를 발견했어요.","그림자가 같은 보물상자를 찾아 주세요.",["🧰","🎁","🧳"],1],
+["🔎","보물방 벽을 자세히 보세요.","다른 보석 하나를 찾아볼까요?",["💎","💎","🔷","💎"],2],
+["🗝️","열쇠가 5개 놓여 있어요.","별 모양 열쇠만 골라 주세요.",["🗝️⭐","🗝️♥","🗝️⭐","🗝️●","🗝️⭐"],"stars"],
+["💎","보석을 발견했어요!","보석 4개가 있는데 2개를 상자에 넣어 주세요.",["💎","💎"],"gems"],
+["👑","드디어 보물방이 열렸어요.","미미에게 어울리는 보물을 골라 주세요.",["👑","🎀","📿","🪄"],"decor"]],
+toto:[
+["🐻","토토의 작은 케이크 가게가 열렸어요.","오늘 케이크의 모양과 같은 접시를 골라 주세요.",["◯","△","□"],0],
+["🍓","첫 손님이 딸기를 부탁했어요.","딸기 3개를 케이크에 올려 주세요.",["🍓","🍓","🍓"],"toppings"],
+["🐰","토끼 손님 두 명이 왔어요.","컵케이크 4개를 친구들에게 나누어 주세요.",[],"cakes"],
+["🧁","다음 케이크 장식은 무엇일까요?","🍓 ⭐ 🍓 ⭐ 🍓 다음은?",["⭐","🍓","🌸"],0],
+["🎂","오늘의 특별 케이크!","좋아하는 장식을 마음껏 골라 완성해 주세요.",["🍓","🍒","⭐","💗"],"decor"]]
+};
+function sparkle(){for(let i=0;i<7;i++){let s=document.createElement('i');s.className='spark';s.textContent='✨';s.style.left=(20+Math.random()*60)+'vw';s.style.top=(50+Math.random()*20)+'vh';document.body.appendChild(s);setTimeout(()=>s.remove(),1000)}}
+function start(s){story=s;step=0;state={};showGame();render()}
+function showGame(){document.getElementById('home').classList.remove('on');document.getElementById('game').classList.add('on');document.getElementById('title').textContent={lulu:'📕 루루 이야기',mimi:'📗 미미 이야기',toto:'📘 토토 이야기'}[story]}
+function home(){document.getElementById('game').classList.remove('on');document.getElementById('home').classList.add('on')}
+function next(){sparkle();setTimeout(()=>{step++;render()},450)}
+function render(){let c=document.getElementById('content'),arr=data[story];if(step>=arr.length){c.innerHTML=`<div class="hero">🏰✨</div><h1>이야기 한 권 완성!</h1><p>${story=='lulu'?'루루의 방이 생겼어요!':story=='mimi'?'미미의 보물방이 열렸어요!':'토토의 케이크 가게가 반짝여요!'}</p><button onclick="home()">📚 다른 이야기 고르기</button>`;return}
+let x=arr[step],opts=x[3],ans=x[4];c.innerHTML=`<div class="hero">${x[0]}</div><h2>${x[1]}</h2><p>${x[2]}</p><div class="play" id="play"></div><div class="row" id="choices"></div>`;
+let p=document.getElementById('play'),ch=document.getElementById('choices');
+if(ans==='nuts'){state.n=6;state.a=0;state.b=0;p.innerHTML=`<div id=nuts class=big>🌰🌰🌰🌰🌰🌰</div><button class=choice onclick="giveNut('a')">🐿️ <span id=a></span></button><button class=choice onclick="giveNut('b')">🐿️ <span id=b></span></button>`;return}
+if(ans==='cakes'){state.n=4;state.a=0;state.b=0;p.innerHTML=`<div id=nuts class=big>🧁🧁🧁🧁</div><button class=choice onclick="giveCake('a')">🐰 <span id=a></span></button><button class=choice onclick="giveCake('b')">🐰 <span id=b></span></button>`;return}
+if(['flowers','gems','toppings'].includes(ans)){state.count=0;p.innerHTML='<div id=made class=big></div>';opts.forEach(o=>{let b=document.createElement('button');b.className='choice';b.textContent=o;b.onclick=()=>collect(o,opts.length);ch.appendChild(b)});return}
+if(ans==='stars'){state.count=0;opts.forEach((o,i)=>{let b=document.createElement('button');b.className='choice';b.textContent=o;b.onclick=()=>{if(i==0||i==2||i==4){b.disabled=true;b.style.opacity=.35;if(++state.count==3)next()}else wiggle(b)};ch.appendChild(b)});return}
+if(ans==='decor'){p.innerHTML='<div class=room id=room>✨</div>';opts.forEach(o=>{let b=document.createElement('button');b.className='choice';b.textContent=o;b.onclick=()=>{document.getElementById('room').textContent+=o;sparkle()};ch.appendChild(b)});let done=document.createElement('button');done.textContent='완성했어요 ✨';done.onclick=next;ch.appendChild(done);return}
+opts.forEach((o,i)=>{let b=document.createElement('button');b.className='choice';b.textContent=o;b.onclick=()=>i===ans?next():wiggle(b);ch.appendChild(b)})
+}
+function wiggle(b){b.animate([{transform:'translateX(-6px)'},{transform:'translateX(6px)'},{transform:'none'}],{duration:250})}
+function collect(o,total){document.getElementById('made').textContent+=o;if(++state.count>=total)next()}
+function giveNut(id){if(state.n<=0)return;state.n--;state[id]++;document.getElementById('nuts').textContent='🌰'.repeat(state.n);document.getElementById(id).textContent='🌰'.repeat(state[id]);if(state.n==0)next()}
+function giveCake(id){if(state.n<=0)return;state.n--;state[id]++;document.getElementById('nuts').textContent='🧁'.repeat(state.n);document.getElementById(id).textContent='🧁'.repeat(state[id]);if(state.n==0)next()}
+</script></body></html>
