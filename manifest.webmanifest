@@ -1,0 +1,8 @@
+{
+  "name": "10·100 탐험대",
+  "short_name": "10·100 탐험대",
+  "start_url": "./?v=5.18.2",
+  "display": "standalone",
+  "background_color": "#fff8ef",
+  "theme_color": "#fff8ef"
+}
