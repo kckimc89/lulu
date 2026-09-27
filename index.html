@@ -2,7 +2,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<meta name="app-version" content="V5.18.4"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#fff9ea"><title>10·100 탐험대 V5.18.4</title>
+<meta name="app-version" content="V5.19"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#fff9ea"><title>10·100 탐험대 V5.19</title>
 <style>
 *{box-sizing:border-box}body{margin:0;background:#fff9ea;color:#493c50;font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo",sans-serif}#app{max-width:980px;margin:auto;padding:14px}.panel{background:#fff;border-radius:30px;padding:20px;text-align:center;box-shadow:0 8px 24px #5f496515}button{border:0;font:inherit;touch-action:manipulation}h1{font-size:clamp(36px,6vw,52px);margin:8px}.lead{font-size:20px;line-height:1.55}.section{font-size:24px;font-weight:950;margin:20px 0 8px}.games{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;max-width:850px;margin:auto}.game{min-height:132px;border:3px solid #eadfb9;border-radius:23px;background:#fff;font-size:19px;font-weight:950;padding:10px}.game b{display:block;font-size:42px}.game.new{border-color:#d9c7f0;background:#fcf9ff}.players{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin:18px}.pl,.go,.soft{padding:14px 22px;border-radius:20px;margin:5px;font-weight:950}.pl{font-size:22px;background:#eee8f1}.go{background:#ff789c;color:#fff;font-size:19px}.soft{background:#eee8f1}.reset{background:#fff0f0;color:#9b3e4d}.timer{display:inline-block;background:#fff3c9;padding:9px 15px;border-radius:17px;font-size:23px;font-weight:950}.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;max-width:720px;margin:14px auto}.num{height:100px;border:4px solid #ecdba8;border-radius:21px;background:#fff;font-size:42px;font-weight:950}.num.sel{border-color:#ff789c;background:#fff0f5}.num.used{opacity:.17}.num.hide{font-size:0;background:#8f7d9b;border-color:#776784}.num.hide:after{content:"★";font-size:38px;color:#fff}.found{max-width:800px;margin:12px auto;padding:12px;background:#fff7d8;border-radius:20px}.tag{display:inline-block;background:#fff;padding:7px 10px;margin:3px;border-radius:13px;font-size:19px;font-weight:900}.msg{font-size:20px;font-weight:900;min-height:48px}.board{max-width:820px;margin:14px auto;background:#f5eff7;border-radius:22px;padding:13px;line-height:1.8}.records{max-width:820px;width:100%;background:#f7f2f8;border-radius:22px;padding:10px}.rh,.rr{display:grid;grid-template-columns:1fr 50px 1fr;gap:6px}.rh div{font-weight:950;padding:4px}.rr div{padding:3px;border-bottom:1px solid #ded5e1;font-weight:800}.best{display:grid;grid-template-columns:1fr 1fr;gap:8px;max-width:760px;width:100%}.best>div{background:#fff3c9;border-radius:17px;padding:8px;font-weight:900}.house{grid-column:1/-1;background:#ffe4a8!important}.finish{display:flex;flex-direction:column;align-items:center;gap:10px}.finish h1{font-size:34px;margin:0}.emoji{font-size:58px}.actions{display:flex;justify-content:center;gap:9px;flex-wrap:wrap;background:#ffffffee;padding:8px;border-radius:20px}.actions button{min-height:56px;min-width:165px;font-size:18px}
 /* Block game */
@@ -82,7 +82,7 @@
   #chit{font-size:20px!important;letter-spacing:-1px!important}
 }
 
-/* V5.18.4 richer castle */
+/* V5.19 richer castle */
 .castleScene{background:linear-gradient(#9fddff 0 53%,#bde98e 53% 83%,#8dcc68 83%)!important;border:4px solid #c9b7e8!important}
 .castleScene:before{content:"🌸  🌼  🌷       🌼  🌸";position:absolute;left:0;right:0;bottom:4px;text-align:center;font-size:24px;letter-spacing:10px;opacity:.9}
 .castleBuild{filter:drop-shadow(0 8px 4px #0002)}
@@ -97,7 +97,11 @@
 @keyframes sparkFly{0%{opacity:0;transform:translateY(15px) scale(.4)}45%{opacity:1;transform:translateY(-10px) scale(1.25)}100%{opacity:0;transform:translateY(-42px) scale(.7)}}
 .castleProgress{max-width:620px;margin:4px auto 8px;height:14px;background:#eee5f6;border-radius:999px;overflow:hidden}
 .castleProgress>i{display:block;height:100%;width:0;background:linear-gradient(90deg,#ffd45d,#ff8fc2);border-radius:999px;transition:.45s}
-</style><link rel="manifest" href="./manifest.webmanifest?v=5.18.4">
+
+.scoreExplain{max-width:620px;margin:10px auto;padding:13px 16px;border-radius:20px;background:#fff8dd;border:2px solid #f1d889;font-weight:900;line-height:1.55}
+.scoreExplain .finalScore{font-size:34px;font-weight:1000;margin-top:4px}
+.hiddenClock{font-size:16px!important;opacity:.8}
+</style><link rel="manifest" href="./manifest.webmanifest?v=5.19">
 </head><body><div id="app"></div><script>
 (function(){
 var A=document.getElementById("app"),P="child",G="",tick,start,seed=1;
@@ -111,7 +115,7 @@ function scoreBest(g,p){return get("score_"+g+"_"+p,0)}
 function ts(){start=Date.now();clearInterval(tick);tick=setInterval(function(){var e=document.getElementById("timer");if(e)e.textContent="⏱ "+fmt(Date.now()-start)},250)}
 function te(){clearInterval(tick);return Date.now()-start}
 function shuffle(a,s){var x=s||12345;for(var i=a.length-1;i;i--){x=(x*48271)%2147483647;var j=x%(i+1),q=a[i];a[i]=a[j];a[j]=q}return a}
-function home(){clearInterval(tick);A.innerHTML='<div class="panel"><h1>🎮 10·100 탐험대 V5.18.4</h1><p class="lead"><b>10과 100의 짝을 여러 게임으로 놀아요.</b><br>빼기와 세 장 조합은 잠시 쉬어갑니다.</p><div class="section">🔎 짝을 찾는 게임</div><div class="games"><button class="game" data-g="pair10"><b>🔍</b>두 장으로 10<br><small>0~10 · 3판 기록</small></button><button class="game" data-g="pair100"><b>💯</b>두 장으로 100<br><small>0·10·20…100 · 3판 기록</small></button><button class="game" data-g="memory10"><b>🧠</b>기억 속의 10<br><small>큰 카드 기억게임</small></button><button class="game" data-g="memory100"><b>🧠</b>기억 속의 100<br><small>십 단위 큰 카드</small></button></div><div class="section">✨ 완전히 다른 방식의 게임</div><div class="games"><button class="game new" data-g="block10"><b>🧱</b>10 블록<br><small>숫자 블록을 떨어뜨려 10이면 팡!</small></button><button class="game new" data-g="block100"><b>🚀</b>100 블록<br><small>십 단위 블록으로 100 만들기</small></button><button class="game new" data-g="gem10"><b>💎</b>10 보석팡<br><small>60초 동안 짝을 찾아 콤보!</small></button><button class="game new" data-g="gem100"><b>👑</b>100 보석팡<br><small>100의 짝으로 최고점수 도전</small></button></div><div class="newZone"><div class="sparkleTitle">✨ 새 놀이</div><div class="games"><button class="game puzzleCard" data-g="puzzle10"><b>🧩</b>10 퍼즐 조각<br><small>10을 만들면 숨은 그림이 열려요</small></button><button class="game bombCard" data-g="castle10"><b>🏰</b>10 성벽 쌓기<br><small>10을 만들 때마다 나의 성이 자라요</small></button></div></div><div class="board"><b>🏆 최고기록</b><br>두 장10　👧 '+fmt(best("pair10","child"))+'　│ 👩 '+fmt(best("pair10","mom"))+'<br>두 장100　👧 '+fmt(best("pair100","child"))+'　│ 👩 '+fmt(best("pair100","mom"))+'<br>10블록 최고점수(100 도전)　👧 '+scoreBest("block10","child")+'　│ 👩 '+scoreBest("block10","mom")+'<br>100블록 최고점수(100 도전)　👧 '+scoreBest("block100","child")+'　│ 👩 '+scoreBest("block100","mom")+'<br>10보석팡 최고점수(100 도전)　👧 '+scoreBest("gem10","child")+'　│ 👩 '+scoreBest("gem10","mom")+'</div><button class="soft reset resetHome" id="reset">🗑️ 기록 리셋</button></div>';
+function home(){clearInterval(tick);A.innerHTML='<div class="panel"><h1>🎮 10·100 탐험대 V5.19</h1><p class="lead"><b>10과 100의 짝을 여러 게임으로 놀아요.</b><br>빼기와 세 장 조합은 잠시 쉬어갑니다.</p><div class="section">🔎 짝을 찾는 게임</div><div class="games"><button class="game" data-g="pair10"><b>🔍</b>두 장으로 10<br><small>0~10 · 3판 기록</small></button><button class="game" data-g="pair100"><b>💯</b>두 장으로 100<br><small>0·10·20…100 · 3판 기록</small></button><button class="game" data-g="memory10"><b>🧠</b>기억 속의 10<br><small>큰 카드 기억게임</small></button><button class="game" data-g="memory100"><b>🧠</b>기억 속의 100<br><small>십 단위 큰 카드</small></button></div><div class="section">✨ 완전히 다른 방식의 게임</div><div class="games"><button class="game new" data-g="block10"><b>🧱</b>10 블록<br><small>숫자 블록을 떨어뜨려 10이면 팡!</small></button><button class="game new" data-g="block100"><b>🚀</b>100 블록<br><small>십 단위 블록으로 100 만들기</small></button><button class="game new" data-g="gem10"><b>💎</b>10 보석팡<br><small>60초 동안 짝을 찾아 콤보!</small></button><button class="game new" data-g="gem100"><b>👑</b>100 보석팡<br><small>100의 짝으로 최고점수 도전</small></button></div><div class="newZone"><div class="sparkleTitle">✨ 새 놀이</div><div class="games"><button class="game puzzleCard" data-g="puzzle10"><b>🧩</b>10 퍼즐 조각<br><small>10을 만들면 숨은 그림이 열려요</small></button><button class="game bombCard" data-g="castle10"><b>🏰</b>10 성벽 쌓기<br><small>10을 만들 때마다 나의 성이 자라요</small></button></div></div><div class="board"><b>🏆 최고기록</b><br>두 장10　👧 '+fmt(best("pair10","child"))+'　│ 👩 '+fmt(best("pair10","mom"))+'<br>두 장100　👧 '+fmt(best("pair100","child"))+'　│ 👩 '+fmt(best("pair100","mom"))+'<br>10블록 최고점수(100 도전)　👧 '+scoreBest("block10","child")+'　│ 👩 '+scoreBest("block10","mom")+'<br>100블록 최고점수(100 도전)　👧 '+scoreBest("block100","child")+'　│ 👩 '+scoreBest("block100","mom")+'<br>10보석팡 최고점수(100 도전)　👧 '+scoreBest("gem10","child")+'　│ 👩 '+scoreBest("gem10","mom")+'</div><button class="soft reset resetHome" id="reset">🗑️ 기록 리셋</button></div>';
 document.querySelectorAll("[data-g]").forEach(function(b){b.onclick=function(){choose(b.dataset.g)}});document.getElementById("reset").onclick=resetMenu}
 function choose(g){G=g;A.innerHTML='<div class="panel"><h1>👥 선수 선택</h1><p class="lead"><b>'+gn[g]+'</b><br>누가 도전할까요?</p><div class="players"><button class="pl" id="c">👧 아이</button><button class="pl" id="m">👩 엄마</button></div><button class="soft" id="back">← 게임 다시 선택</button></div>';document.getElementById("c").onclick=function(){P="child";intro(g)};document.getElementById("m").onclick=function(){P="mom";intro(g)};document.getElementById("back").onclick=home}
 function intro(g){G=g;var desc=g==="puzzle10"?"10이 되는 두 숫자를 찾을 때마다 숨은 그림 조각이 하나씩 열려요!":g==="castle10"?"10이 되는 짝을 찾아 성벽부터 탑과 깃발까지 완성해요!":g.indexOf("block")===0?"블록을 떨어뜨려 짝이 맞으면 사라져요. 12번 성공하면 완성!":g.indexOf("gem")===0?"30초 동안 짝을 찾아 터뜨려요. 연속 성공하면 콤보 점수!":"내 기록을 깨고, 엄마/아이 기록에도 도전해요!";A.innerHTML='<div class="panel"><h1>'+names[P]+' · '+gn[g]+'</h1><p class="lead">'+desc+'</p><button class="go" id="start">🏁 시작!</button><button class="soft" id="back">돌아가기</button></div>';document.getElementById("start").onclick=function(){seed=Date.now()%999983;if(g==="puzzle10")puzzleGame();else if(g==="castle10")castleGame();else if(g==="pair10"){ts();pairGame(10,1)}else if(g==="pair100"){ts();pairGame(100,1)}else if(g==="memory10")memoryGame(10);else if(g==="memory100")memoryGame(100);else if(g==="block10")blockGame(10);else if(g==="block100")blockGame(100);else if(g==="gem10")gemGame(10);else gemGame(100)};document.getElementById("back").onclick=function(){choose(g)}}
@@ -135,11 +139,11 @@ function showPuzzleReveal(key,pic,score){
  document.getElementById("picok").onclick=function(){finishScore(key,score)}
 }
 function castleGame(){
- var key="castle10",base=[0,1,2,3,4,5,5,6,7,8,9,10],nums=[],sel=[],score=0,made=0,locked=false;
+ var key="castle10",base=[0,1,2,3,4,5,5,6,7,8,9,10],nums=[],sel=[],score=0,made=0,locked=false,startAt=Date.now();
  var parts=["w1","w2","w3","w4","t1","t2","r1","r2","gate","flag"];
  function shuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t}return a}
  function newRound(){nums=shuffle(base.slice());sel=[];locked=false;draw()}
- A.innerHTML='<div class="panel"><h2>🏰 '+names[P]+' · 10 성벽 쌓기</h2><div class="hud"><span class="pill">점수 <b id="cscore">0</b>/100</span><span class="pill">완성 <b id="cmade">0</b>/10</span><span class="pill">최고 '+scoreBest(key,P)+'</span></div><div class="castleProgress"><i id="cbar"></i></div><div class="castleScene" id="castleScene"><div class="sun">☀️</div><div class="cloud c1">☁️</div><div class="cloud c2">☁️</div><div class="castleBuild"><div class="wall w1"></div><div class="wall w2"></div><div class="wall w3"></div><div class="wall w4"></div><div class="tower t1"></div><div class="tower t2"></div><div class="roof r1"></div><div class="roof r2"></div><div class="gate"></div><div class="flag">🚩</div></div></div><div class="bigHit" id="chit">두 숫자로 10을 만들어 성을 지어봐!</div><div class="castleNums" id="cnums"></div><div class="msg" id="cmsg">매 단계마다 숫자가 다시 섞여요. 10번 성공하면 성 완성! ✨</div><button class="soft" id="quit">그만하기</button></div>';
+ A.innerHTML='<div class="panel"><h2>🏰 '+names[P]+' · 10 성벽 쌓기</h2><div class="hud"><span class="pill">성벽 <b id="cmade">0</b>/10</span><span class="pill hiddenClock">⏱ 기록 측정 중</span><span class="pill">최고 '+scoreBest(key,P)+'</span></div><div class="castleProgress"><i id="cbar"></i></div><div class="castleScene" id="castleScene"><div class="sun">☀️</div><div class="cloud c1">☁️</div><div class="cloud c2">☁️</div><div class="castleBuild"><div class="wall w1"></div><div class="wall w2"></div><div class="wall w3"></div><div class="wall w4"></div><div class="tower t1"></div><div class="tower t2"></div><div class="roof r1"></div><div class="roof r2"></div><div class="gate"></div><div class="flag">🚩</div></div></div><div class="bigHit" id="chit">두 숫자로 10을 만들어 성을 지어봐!</div><div class="castleNums" id="cnums"></div><div class="msg" id="cmsg">매 단계마다 숫자가 다시 섞여요. 10번 성공하면 성 완성! ✨</div><button class="soft" id="quit">그만하기</button></div>';
  document.getElementById("quit").onclick=home;
  function draw(){
    var box=document.getElementById("cnums");box.innerHTML="";
@@ -156,7 +160,6 @@ function castleGame(){
      locked=true;
      if(x.v+y.v===10){
        made++;score=Math.min(100,made*10);
-       document.getElementById("cscore").textContent=score;
        document.getElementById("cmade").textContent=made;
        document.getElementById("cbar").style.width=(made*10)+"%";
        document.getElementById("chit").textContent="✨ "+x.v+" + "+y.v+" = 10 ✨";
@@ -164,7 +167,9 @@ function castleGame(){
        var scene=document.getElementById("castleScene"),sp=document.createElement("span");sp.className="castleSpark";sp.textContent=["✨","⭐","💖"][made%3];sp.style.left=(25+Math.random()*50)+"%";sp.style.top=(35+Math.random()*35)+"%";scene.appendChild(sp);setTimeout(function(){sp.remove()},850);
        document.getElementById("cmsg").textContent=made<10?"잘했어요! 다음 숫자들이 다시 섞여요 🧱":"🎉 10번 성공! 나의 성 완성!";
        if(made>=10){
-         setTimeout(function(){showCastleReveal(key,100)},850);
+         var elapsed=Math.max(1,Math.round((Date.now()-startAt)/1000));
+         var finalScore=castleScore(elapsed);
+         setTimeout(function(){showCastleReveal(key,finalScore,elapsed)},850);
        }else{
          setTimeout(function(){
            document.getElementById("chit").textContent="다음! 두 숫자로 10을 만들어봐!";
@@ -182,8 +187,17 @@ function castleGame(){
  }
  newRound()
 }
-function showCastleReveal(key,score){
- A.innerHTML='<div class="panel"><div class="castleDone">👑✨ 나의 마법성 완성! ✨👑</div><div class="castleScene castleReveal"><div class="sun">☀️</div><div class="cloud c1">☁️</div><div class="cloud c2">☁️</div><div class="castleBuild"><div class="wall w1 built"></div><div class="wall w2 built"></div><div class="wall w3 built"></div><div class="wall w4 built"></div><div class="tower t1 built"></div><div class="tower t2 built"></div><div class="roof r1 built"></div><div class="roof r2 built"></div><div class="gate built"></div><div class="flag built">🚩</div></div></div><p class="lead"><b>10의 짝 10개를 찾아 멋진 마법성을 완성했어요!</b><br>완성된 성을 천천히 보고 확인해 주세요.</p><button class="go confirmPic" id="castleok">✓ 성 확인했어요</button></div>';
+function castleScore(sec){
+ if(sec<=30)return 100;
+ if(sec<=40)return 95;
+ if(sec<=50)return 90;
+ if(sec<=60)return 85;
+ if(sec<=75)return 80;
+ if(sec<=90)return 75;
+ return 70
+}
+function showCastleReveal(key,score,elapsed){
+ A.innerHTML='<div class="panel"><div class="castleDone">👑✨ 나의 마법성 완성! ✨👑</div><div class="castleScene castleReveal"><div class="sun">☀️</div><div class="cloud c1">☁️</div><div class="cloud c2">☁️</div><div class="castleBuild"><div class="wall w1 built"></div><div class="wall w2 built"></div><div class="wall w3 built"></div><div class="wall w4 built"></div><div class="tower t1 built"></div><div class="tower t2 built"></div><div class="roof r1 built"></div><div class="roof r2 built"></div><div class="gate built"></div><div class="flag built">🚩</div></div></div><div class="scoreExplain">🏰 성 완성 <b>70점</b><br>⏱️ 완성 시간 <b>'+elapsed+'초</b> · 시간 보너스 <b>+'+(score-70)+'점</b><div class="finalScore">⭐ 이번 기록 '+score+'점</div></div><p class="lead"><b>10의 짝 10개를 찾아 멋진 마법성을 완성했어요!</b><br>완성된 성을 천천히 보고 확인해 주세요.</p><button class="go confirmPic" id="castleok">✓ 성 확인했어요</button></div>';
  document.getElementById("castleok").onclick=function(){finishScore(key,score)}
 }
 function blockGame(target){var vals=target===10?[0,1,2,3,4,5,6,7,8,9,10]:[0,10,20,30,40,50,60,70,80,90,100],grid=Array.from({length:5},()=>[]),score=0,combo=0,made=0,lastGift=false,next=vals[Math.floor(Math.random()*vals.length)];A.innerHTML='<div class="panel"><h2>🧱 '+names[P]+' · '+gn[target===10?"block10":"block100"]+'</h2><div class="hud"><span class="pill">점수 <b id="score">0</b></span><span class="pill">완성 <b id="made">0</b>/10</span><span class="pill">최고 <b>'+scoreBest(target===10?"block10":"block100",P)+'</b></span></div><div class="blockPrompt">🎯 '+target+'을 맞춰봐!</div><div class="nextHero"><span>다음 블록</span><b id="next">'+next+'</b></div><div class="bigHit" id="bigHit"></div><div class="combo" id="combo"></div><div class="cols" id="cols"></div><div class="blockGrid" id="grid"></div><div class="msg" id="msg">어느 칸에 떨어뜨릴까?</div><button class="soft" id="quit">그만하기</button></div>';document.getElementById("quit").onclick=home;for(let c=0;c<5;c++){let b=document.createElement("button");b.className="drop";b.textContent="▼ "+(c+1);b.onclick=()=>drop(c);document.getElementById("cols").appendChild(b)}render();
@@ -219,7 +233,7 @@ function clearGameRecords(g,who){var ps=who==="all"?["child","mom"]:[who];ps.for
 function resetMenu(){A.innerHTML='<div class="panel"><h1>🗑️ 기록 모두 리셋</h1><p class="lead">지울 기록을 선택하세요.</p><button class="soft reset" id="c">👧 아이 기록 모두 지우기</button><button class="soft reset" id="m">👩 엄마 기록 모두 지우기</button><button class="soft reset" id="all">🏠 모든 기록 지우기</button><br><button class="go" id="back">취소</button></div>';document.getElementById("c").onclick=()=>confirmReset("child");document.getElementById("m").onclick=()=>confirmReset("mom");document.getElementById("all").onclick=()=>confirmReset("all");document.getElementById("back").onclick=home}
 function confirmReset(w){A.innerHTML='<div class="panel"><h1>정말 지울까요?</h1><p class="lead">선택한 기록은 되돌릴 수 없어요.</p><button class="soft reset" id="yes">네, 지우기</button><button class="go" id="no">아니요</button></div>';document.getElementById("yes").onclick=function(){var ps=w==="all"?["child","mom"]:[w],gs=Object.keys(gn);ps.forEach(p=>gs.forEach(g=>{["hist_","score_","scores_"].forEach(x=>localStorage.removeItem("v516_"+x+g+"_"+p))}));home()};document.getElementById("no").onclick=resetMenu}
 home()})();
-</script><div class="versionBadge">BUILD V5.18.4</div>
+</script><div class="versionBadge">BUILD V5.19</div>
 <script>
 (function(){
   try{
